@@ -30,6 +30,7 @@
                         <td>{{$product->price}}</td>
                         <td>{{$product->user->name}}</td>
                         <td>
+                            @if(auth()->id() == $product->user_id)
                             <div class="input-group">
                                 <form action="{{route('product.destroy', $product)}}" method="POST">
                                     @csrf
@@ -44,6 +45,7 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
+                            @endif
                         </td>
                     </tr>
                     </tbody>
