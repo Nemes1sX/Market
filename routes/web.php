@@ -13,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('product', App\Http\Controllers\ProductController::class);
 });
