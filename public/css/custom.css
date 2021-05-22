@@ -1,0 +1,17 @@
+.alert-box {
+    margin: 0 auto;
+}
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.products-form {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 300px;
+    max-width: 1200px;
+}
+.delete{
+    border-style: none;
+    background: none;
+}
