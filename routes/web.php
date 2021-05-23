@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::redirect('/', 'product');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('product/top', [App\Http\Controllers\ProductController::class, 'top3'])->name('product.top');
     Route::resource('product', App\Http\Controllers\ProductController::class);
 });

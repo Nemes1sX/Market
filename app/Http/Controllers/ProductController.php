@@ -19,6 +19,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function top3()
+    {
+        $products = Product::orderBy('price')->take(3)->get();
+
+        return view('product.top', compact('products'));
+    }
+
     public function index()
     {
         $products = Product::paginate(15);
@@ -98,10 +105,5 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success', 'Product was deleted');
     }
 
-    public function top3()
-    {
-        $products = Product::orderBy('price')->take(3)->get();
 
-        return view('product.top', compact($products));
-    }
 }

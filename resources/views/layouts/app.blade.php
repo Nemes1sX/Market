@@ -60,7 +60,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="#">{{ __('TOP 3') }}</a>
+                                <a class="nav-link" href="{{route ('product.top')}}">{{ __('TOP 3') }}</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
