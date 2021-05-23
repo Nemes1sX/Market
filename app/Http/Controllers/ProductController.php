@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Jobs\ProductJob;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -43,7 +44,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        auth()->user()->products()->create($request->validated());
+        ProductJob::dispatch($request->validated(), auth()->id());
 
         return redirect()->route('product.index')->with('success', 'Product was created successfully');
     }

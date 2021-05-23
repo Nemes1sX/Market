@@ -32,16 +32,17 @@
                 <div class="form-group">
                     <strong>Category</strong>
                     <select name="category">
-                        <option value="farming" {{$product->category ? 'selected' : ''}}>Farming </option>
-                        <option value="chemistry" {{$product->category ? 'selected' : ''}}>Chemistry</option>
-                        <option value="food" {{$product->category ? 'selected' : ''}}>Food</option>
-                        <option value="housework" {{$product->category ? 'selected' : ''}}>Housework</option>
-                        <option value="carparts" {{$product->category ? 'selected' : ''}}>Car parts</option>
+                        <option value="Farming" {{$product->category == 'Farming' ? 'selected' : ''}}>Farming </option>
+                        <option value="Chemistry" {{$product->category == 'Chemistry' ? 'selected' : ''}}>Chemistry</option>
+                        <option value="Food" {{$product->category == 'Food' ? 'selected' : ''}}>Food</option>
+                        <option value="Housework" {{$product->category == 'Housework' ? 'selected' : ''}}>Housework</option>
+                        <option value="Car parts" {{$product->category == 'Car parts' ? 'selected' : ''}}>Car parts</option>
                     </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-success">Add Product</button>
+                <a class="btn btn-danger" href="{{route('product.index')}}">Back to product list</a>
             </div>
         </div>
     </form>
