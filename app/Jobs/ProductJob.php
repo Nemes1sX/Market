@@ -37,13 +37,14 @@ class ProductJob implements ShouldQueue
     {
          $product =  \App\Factory\ProductFactory::create($this->request);
 
-        \App\Models\Product::updateOrCreate([
+          \App\Models\Product::updateOrCreate([
             'user_id' => $this->user_id,
             'name' => $product->name(),
             'category' => $product->category()
          ],[
             'price' => $product->price()
          ]);
+
 
     }
 }

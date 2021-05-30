@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Jobs\ProductJob;
 use App\Models\Product;
+use App\Notifications\CheapestPriceNotification;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
 
 class ProductController extends Controller
 {
+
+
     public function __construct()
     {
         $this->authorizeResource(Product::class, 'product');
@@ -28,7 +33,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::all();
 
         return view('product.index', compact('products'));
     }
@@ -52,6 +57,17 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         ProductJob::dispatch($request->validated(), auth()->id());
+
+        $cheapestProduct = Product::where('category', $request->category)->orderBy('price', 'asc')->firstOrFail();
+
+        $product = Product::where('category', $request->category)->latest('updated_at')->firstOrFail();
+
+        if ($product->price == $cheapestProduct->price) {
+            $users = User::all();
+            foreach ($users as $user) {
+               $user->notify(new CheapestPriceNotification($product));
+            }
+        }
 
         return redirect()->route('product.index')->with('success', 'Product was created successfully');
     }

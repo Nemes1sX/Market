@@ -28,7 +28,7 @@
                         <td>{{$product->name}}</td>
                         <td>{{$product->category}}</td>
                         <td>{{$product->price}}</td>
-                        <td>{{$product->user->name}}</td>
+                        <td>{{Arr::get($product, 'user.name')}}</td>
                         <td>
                             @if(auth()->id() == $product->user_id)
                             <div class="input-group">
@@ -53,6 +53,5 @@
             </table>
                 <h2>No products!</h2>
             @endforelse
-            {{ $products->links() }}
         </div>
 @endsection
