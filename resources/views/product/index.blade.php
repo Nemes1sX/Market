@@ -30,8 +30,8 @@
                         <td>{{$product->price}}</td>
                         <td>{{Arr::get($product, 'user.name')}}</td>
                         <td>
-                            @if(auth()->id() == $product->user_id)
                             <div class="input-group">
+                                @can('delete',$product)
                                 <form action="{{route('product.destroy', $product)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -41,11 +41,13 @@
                                         <i class="fas fa-trash fa-lg text-danger"></i>
                                     </button>
                                 </form>
+                                @endcan
+                                @can('update',$product)
                                 <a href="{{route('product.edit',$product)}}">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                @endcan
                             </div>
-                            @endif
                         </td>
                     </tr>
                     </tbody>
